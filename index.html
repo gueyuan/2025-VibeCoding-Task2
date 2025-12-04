@@ -214,7 +214,49 @@
         .section-about {
             background-color: var(--color-background);
         }
+
+        /* 關於我內容容器：手機版預設單欄堆疊 */
+        .about-content {
+            display: flex;
+            flex-direction: column; /* 手機優先：垂直堆疊 */
+            gap: var(--space-l);
+        }
+
+        .about-text {
+            /* 讓文字區塊在平板佈局時可以彈性調整寬度 */
+            flex-basis: 50%;
+        }
+
+        .about-image {
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            /* 手機版：圖片上方留一點空間 */
+            margin-top: var(--space-m); 
+            flex-basis: 50%;
+        }
+
+        .about-features {
+            list-style: none;
+            padding: 0;
+            margin-top: var(--space-m);
+        }
+
+        .about-features li {
+            position: relative;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            color: var(--color-text-light);
+        }
         
+        /* 使用偽元素作為亮色勾號 */
+        .about-features li::before {
+            content: "✓";
+            color: var(--color-secondary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
         /* CSS:ABOUT-END */
 
         /* CSS:SKILLS-START */
@@ -333,6 +375,17 @@
             .hero-subtitle {
                 font-size: 1.2rem;
             }
+
+            /* **About 區塊：平板以上左右雙欄** */
+            .about-content {
+                display: grid;
+                grid-template-columns: 1fr 1fr; /* 左右各佔 1 欄 */
+                align-items: center; /* 垂直置中 */
+            }
+
+            .about-image {
+                margin-top: 0; /* 清除手機版的上邊距 */
+            }
             
             /* Projects 區塊：雙欄佈局 */
             .projects-grid {
@@ -391,14 +444,35 @@
                     
                     <p style="margin-top: var(--space-l);">（開發者提示：此區為 Hero 區占位內容，之後會用 Section SDD Prompt 產生正式文案與版面來替換。）</p>
                     
-                    <img src="https://source.unsplash.com/1200x500/?developer,programming,abstract" alt="一位前端開發者正在筆電前專注撰寫程式碼，背景為抽象科技感圖案。" class="hero-image" loading="lazy">
+                    <img src="https://source.unsplash.com/1200x500/?developer,laptop,code" alt="一位前端開發者正在筆電前專注撰寫程式碼，背景為抽象科技感圖案。" class="hero-image" loading="lazy">
                 </div>
             </section>
             <section id="about" class="section section-about" aria-labelledby="about-heading">
                 <div class="container">
                     <h2 id="about-heading" class="section-title">關於我</h2>
-                    <p>這裡是 About 區的占位內容。未來會用 Section SDD 產生更完整的**個人介紹、學習歷程**等內容。</p>
-                    <p>開發者請注意：之後會用 Section SDD 的 Prompt 產生新的 section，請把新的 section 程式碼整段貼在這兩個註解中間，完全取代現在這一區。</p>
+                    
+                    <div class="about-content">
+                        <div class="about-text">
+                            <p>
+                                我是一位充滿熱情的前端工程師與學習者，目前專注於 **React** 與 **Vue** 框架的應用，並透過教學與接案來實踐技術。我的核心技能涵蓋響應式網頁設計（RWD）、CSS3 動畫優化，以及使用現代 JavaScript 解決複雜的用戶界面問題。
+                            </p>
+                            
+                            <p>
+                                我相信優秀的程式碼始於清晰的溝通。我的工作風格是「重視使用者體驗、喜歡把技術概念講清楚」。無論是與設計師協作還是與後端工程師對接，我都會努力成為團隊間最順暢的溝通橋樑，確保每個專案都能高效且精準地交付。
+                            </p>
+                            
+                            <ul class="about-features">
+                                <li>專精於 **Mobile-First** 響應式佈局設計，確保跨裝置體驗一致。</li>
+                                <li>具備將高保真設計稿轉化為像素級完美前端界面的能力。</li>
+                                <li>喜歡分享技術經驗，樂於指導新手入門現代前端開發。</li>
+                            </ul>
+                            
+                            <a href="#projects" class="btn">查看作品集</a>
+                            <a href="#contact" class="btn">聯絡我</a>
+                        </div>
+
+                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80" alt="一位工程師坐在電腦前，專注地盯著螢幕上的程式碼，背景虛化" class="about-image" loading="lazy">
+                    </div>
                 </div>
             </section>
             <section id="skills" class="section section-skills" aria-labelledby="skills-heading">
@@ -424,21 +498,21 @@
                     
                     <div class="projects-grid">
                         <article class="project-card">
-                            <img src="https://source.unsplash.com/600x400/?web-design,portfolio" alt="專案一：響應式網頁設計截圖" class="project-image" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80" alt="專案一：響應式網頁設計截圖" class="project-image" loading="lazy">
                             <h3>專案一：個人作品網站</h3>
                             <p>專注於 RWD、無障礙設計和效能優化的單頁應用。</p>
                             <a href="https://example.com/project-a" class="btn" style="background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);">查看專案</a>
                         </article>
                         
                         <article class="project-card">
-                            <img src="https://source.unsplash.com/600x400/?ecommerce,dashboard" alt="專案二：電商後台儀表板截圖" class="project-image" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80" alt="專案二：電商後台儀表板截圖" class="project-image" loading="lazy">
                             <h3>專案二：電商後台介面</h3>
                             <p>使用 Vue 實作資料視覺化和複雜表單。</p>
                             <a href="https://example.com/project-b" class="btn" style="background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);">查看專案</a>
                         </article>
 
                         <article class="project-card">
-                            <img src="https://source.unsplash.com/600x400/?utility,app" alt="專案三：工具型應用程式介面" class="project-image" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80" alt="專案三：工具型應用程式介面" class="project-image" loading="lazy">
                             <h3>專案三：線上工具 App</h3>
                             <p>一個使用原生 JavaScript 開發的實用工具型應用。</p>
                             <a href="https://example.com/project-c" class="btn" style="background-color: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-primary);">查看專案</a>
@@ -476,7 +550,7 @@
         <footer class="site-footer" role="contentinfo">
             <div class="container">
                 <p>© 2025 小明 · Frontend Dev Portfolio · <a href="https://github.com/yourname" target="_blank" rel="noopener noreferrer">GitHub</a></p>
-                <img src="https://source.unsplash.com/60x60/?coding,logo" alt="科技與編碼相關的抽象圖案小圖標" style="display: inline-block; width: 30px; height: 30px; border-radius: 50%; margin-top: 8px;" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80" alt="科技與編碼相關的抽象圖案小圖標" style="display: inline-block; width: 30px; height: 30px; border-radius: 50%; margin-top: 8px;" loading="lazy">
             </div>
         </footer>
     </div>
