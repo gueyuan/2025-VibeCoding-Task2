@@ -22,6 +22,7 @@
             /* 邊框/分隔線 */
             --color-border: #333333;
             /* 間距 */
+            --space-xs: 8px; /* 新增更小的間距變數，用於小螢幕導覽列 */
             --space-m: 16px;
             --space-l: 32px;
         }
@@ -42,8 +43,10 @@
             line-height: 1.6;
             color: var(--color-text-light);
             background-color: var(--color-background);
-            max-width: 100%; /* 防止整體水平捲動 */
+            /* **關鍵修正：在 body 級別處理溢出** */
+            max-width: 100%; 
             overflow-x: hidden;
+            min-width: 320px; /* 確保至少有 320px 的空間 */
         }
 
         /* 全域樣式 */
@@ -54,9 +57,9 @@
             font-weight: 700;
         }
 
-        h1 { font-size: 2.5rem; } /* 手機字體較小，之後 RWD 放大 */
-        h2 { font-size: 2rem; color: var(--color-primary); }
-        h3 { font-size: 1.5rem; }
+        h1 { font-size: 2.2rem; } /* 在 320px 下 h1 稍微縮小 */
+        h2 { font-size: 1.8rem; color: var(--color-primary); } /* 在 320px 下 h2 稍微縮小 */
+        h3 { font-size: 1.4rem; }
 
         p {
             margin-top: 0;
@@ -80,15 +83,16 @@
             display: block;
         }
 
+        /* **關鍵修正：container 處理 padding** */
         .container {
             width: 100%;
-            max-width: 1440px; /* 依照規格書推估最大內容寬度 */
+            max-width: 1440px; 
             margin: 0 auto;
             padding: 0 var(--space-m); /* 手機預設 padding: 16px */
         }
         
         .section {
-            padding: var(--space-l) 0; /* 區塊上下間距 */
+            padding: var(--space-l) 0; 
             border-bottom: 1px solid var(--color-border);
         }
 
@@ -109,15 +113,16 @@
         }
 
         .logo-text {
-            font-size: 1.2rem;
+            font-size: 1.1rem; /* 320px 下 Logo 稍微縮小 */
             font-weight: bold;
             color: var(--color-text-light);
             white-space: nowrap;
         }
 
         .nav-menu {
+            /* **關鍵修正：小螢幕間距縮小** */
             display: flex;
-            gap: var(--space-m);
+            gap: var(--space-xs); /* 縮小導覽列連結間距 */
             list-style: none;
             padding: 0;
             margin: 0;
@@ -125,8 +130,9 @@
         
         .nav-link {
             color: var(--color-text-medium);
-            padding: 4px 0;
+            padding: 4px 6px; /* 調整連結內邊距，避免太靠近 */
             font-weight: 500;
+            font-size: 0.9rem; /* 320px 下連結字體縮小 */
         }
 
         .nav-link:hover {
@@ -144,14 +150,15 @@
         /* 按鈕共用樣式 */
         .btn {
             display: inline-block;
-            padding: 10px 20px;
+            padding: 10px 15px; /* 320px 下按鈕 padding 縮小 */
             background-color: var(--color-primary);
-            color: var(--color-background); /* 按鈕文字用深色與背景對比 */
+            color: var(--color-background); 
             border-radius: 4px;
             font-weight: bold;
             transition: background-color 0.3s ease;
             margin-right: var(--space-m);
             margin-bottom: var(--space-m);
+            white-space: nowrap; /* 確保按鈕文字不被強制換行 */
         }
 
         .btn:hover {
@@ -183,13 +190,13 @@
         }
         
         .hero-title {
-            font-size: 3rem;
+            font-size: 2.2rem; /* 與 h1 保持一致，確保 320px 不溢出 */
             color: var(--color-primary);
             margin-bottom: var(--space-m);
         }
         
         .hero-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--color-text-light);
             margin-bottom: var(--space-l);
         }
@@ -300,14 +307,32 @@
                 padding: 0 var(--space-l); /* 平板/桌面 padding: 32px */
             }
 
-            /* 導覽列：標誌和連結間距 */
+            /* 導覽列：字體/間距放大 */
             .logo-text {
                 font-size: 1.5rem;
+            }
+            
+            .nav-menu {
+                gap: var(--space-m);
+            }
+            
+            .nav-link {
+                padding: 4px 0;
+                font-size: 1rem;
             }
 
             /* Hero 區塊：字體放大 */
             h1 { font-size: 3.5rem; }
             h2 { font-size: 2.5rem; }
+            h3 { font-size: 1.5rem; }
+            
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
             
             /* Projects 區塊：雙欄佈局 */
             .projects-grid {
@@ -323,13 +348,16 @@
         /* RWD 媒體查詢 (min-width: 1024px) */
         @media (min-width: 1024px) {
             
+            /* Hero 區塊：字體進一步放大 */
+            h1 { font-size: 4rem; }
+            .hero-title {
+                font-size: 4rem;
+            }
+
             /* Projects 區塊：三欄佈局 */
             .projects-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
-            
-            /* Hero 區塊：字體進一步放大 */
-            h1 { font-size: 4rem; }
         }
 
         /* CSS:RWD-END */
